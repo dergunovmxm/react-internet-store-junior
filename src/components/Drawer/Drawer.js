@@ -1,12 +1,13 @@
-const Drawer = () => {
+const Drawer = (props) => {
     return (
-        <div style={{ display: 'none' }} className="overlay">
+
+        <div className="overlay">
 
             <div className="drawer">
 
                 <h2 className="mb-30 d-flex justify-between">
                     Корзина
-                    <img className="removeBtn cu-p" src="/images/btn-remove.svg" alt="remove" />
+                    <img onClick = {props.onCloseCart} className="removeBtn cu-p" src="/images/btn-remove.svg" alt="Close" />
                 </h2>
 
                 <div className="items flex">
