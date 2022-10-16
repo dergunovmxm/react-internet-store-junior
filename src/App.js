@@ -8,7 +8,7 @@ import Header from "./components/Header/Header";
 function App() {
 
   const [items, setItems] = useState([])
-
+  const [cartItems, setCartItems] = useState([])
   const [cartOpened, setCartOpened] = useState(false)
 
   useEffect(() => {
@@ -23,10 +23,14 @@ function App() {
 
   }, [])
 
+  const onAddToCart = (obj) =>{
+    setCartItems(prev => [...prev, obj])
+}
+
 
   return (
     <div className="container clear">
-      {cartOpened ? <Drawer onCloseCart={() => setCartOpened(false)} /> : null}
+      {cartOpened ? <Drawer items={cartItems} onCloseCart={() => setCartOpened(false)} /> : null}
       <Header
         onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
@@ -40,13 +44,13 @@ function App() {
 
         <div className="d-flex flex-wrap">
           {
-            items.map(val => (
+            items.map(item => (
               <Card
-                title={val.title}
-                price={val.price}
-                imageUrl={val.imageUrl}
-                onCkickFavourite={() => alert(`Добавлено в закладки ${val.title}`)}
-                onClickPlus={() => alert(val.title)} />
+                title={item.title}
+                price={item.price}
+                imageUrl={item.imageUrl}
+                onFavourite={() => alert(`Добавлено в закладки ${item.title}`)}
+                onPlus={(obj) => onAddToCart(obj)} />
             ))
           }
         </div>
