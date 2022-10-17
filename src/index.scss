@@ -49,7 +49,7 @@ header {
   padding: 0 15px;
   position: relative;
 
-  .clear{
+  .clear {
     position: absolute;
     right: 10px;
     width: 18px;
@@ -66,10 +66,6 @@ header {
   }
 }
 
-.favorite {
-  position: absolute;
-  cursor: pointer;
-}
 
 .overlay {
   position: absolute;
@@ -93,6 +89,7 @@ header {
   background: #FFFFFF;
   box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
   padding: 30px;
+
   h2 {
     margin: 0;
   }
@@ -144,6 +141,33 @@ header {
 
 }
 
+.cartEmpty {
+  text-align: center;
+
+  p {
+    width: 280px;
+    line-height: 24px;
+  }
+
+  .greenButton {
+    width: 245px;
+    margin-top: 20px;
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(3px);
+      }
+    }
+
+    img {
+      position: relative;
+      top: 1px;
+      transform: rotate(180deg);
+      margin-right: 15px;
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+}
 
 .greenButton {
 
