@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom"; 
 import axios from "axios"
 import Card from "./components/Card";
 import Drawer from "./components/Drawer/Drawer";
@@ -10,18 +11,19 @@ function App() {
 
   const [items, setItems] = useState([])
   const [cartItems, setCartItems] = useState([])
+  const [favorites, setFavorites] = useState([])
   const [cartOpened, setCartOpened] = useState(false)
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
 
     axios.get('https://63440055b9ab4243cadca972.mockapi.io/items')
-      .then(response => {
+      .then((response) => {
         setItems(response.data)
       })
 
     axios.get('https://63440055b9ab4243cadca972.mockapi.io/cart')
-      .then(response => {
+      .then((response) => {
         setCartItems(response.data)
       })
 
@@ -30,12 +32,18 @@ function App() {
   const onAddToCart = (obj) => {
 
     axios.post('https://63440055b9ab4243cadca972.mockapi.io/cart', obj)
-    setCartItems(prev => [...prev, obj])
+    setCartItems((prev) => [...prev, obj])
   }
 
   const onRemoveItem = (id) => {
     axios.delete(`https://63440055b9ab4243cadca972.mockapi.io/cart/${id}`)
     setCartItems((prev) => prev.filter(item => item.id !== id))
+  }
+
+  const onAddToFavourite = (obj) => {
+
+    axios.post('https://63440055b9ab4243cadca972.mockapi.io/favorite', obj)
+    setFavorites((prev) => [...prev, obj])
   }
 
   const onChangeSearchInput = (event) => {
@@ -45,8 +53,9 @@ function App() {
   return (
     <div className="container clear">
       {cartOpened && <Drawer items={cartItems} onCloseCart={() => setCartOpened(false)} onRemove={onRemoveItem} /> }
-      <Header
-        onClickCart={() => setCartOpened(true)} />
+      
+      <Route path="/favotires"><Header onClickCart={() => setCartOpened(true)} /></Route>
+
       <div className="content p-40">
         <div className="d-flex align-center mb-40 justify-between">
           <h1>{
@@ -78,7 +87,7 @@ function App() {
                   title={item.title}
                   price={item.price}
                   imageUrl={item.imageUrl}
-                  onFavourite={() => alert(`Добавлено в закладки ${item.title}`)}
+                  onFavourite={(obj) => onAddToFavourite(obj)}
                   onPlus={(obj) => onAddToCart(obj)} />
               ))
           }

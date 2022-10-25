@@ -13,6 +13,7 @@ const Card = ({ price, imageUrl, title, onFavourite, onPlus }) => {
     }
 
     const onClickFavourite = () => {
+        onFavourite({ title, price, imageUrl })
         setFavourite(!isFavourite)
     }
     return (
