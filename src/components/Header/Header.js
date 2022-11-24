@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
+import { Link, Routes } from "react-router-dom"
 
 const Header = (props) => {
 
     return (
+        
         <header className="d-flex justify-between align-center p-40">
             <Link to="/">
                 <div className="d-flex align-center">
@@ -22,7 +23,7 @@ const Header = (props) => {
                     <span>7897897</span>
                 </li>
                 <li className="mr-20 cu-p">
-                    <Link to="/favotires">
+                    <Link to="/favourites">
                         <img width={18} height={18} src='/images/favorite.svg' alt="user" />
                     </Link>
                 </li>

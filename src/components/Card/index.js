@@ -2,20 +2,21 @@ import styles from './Card.module.scss'
 import { useState, useEffect } from 'react'
 
 
-const Card = ({ price, imageUrl, title, onFavourite, onPlus }) => {
+const Card = ({ id, price, imageUrl, title, onFavourite, onPlus, favorited = false }) => {
 
     const [isAdded, setIsAdded] = useState(false)
-    const [isFavourite, setFavourite] = useState(false)
+    const [isFavourite, setFavourite] = useState(favorited)
 
     const onClickPlus = () => {
         onPlus({ title, price, imageUrl })
         setIsAdded(!isAdded)
     }
 
-    const onClickFavourite = () => {
-        onFavourite({ title, price, imageUrl })
-        setFavourite(!isFavourite)
+    const onClickFavourite= () => {
+        onFavourite({ id, title, price, imageUrl });
+        setFavourite(!isFavourite);
     }
+
     return (
 
         <div className={styles.card}>
